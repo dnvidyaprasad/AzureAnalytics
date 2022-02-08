@@ -1,0 +1,15 @@
+{
+	"name": "tstAzureTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "tstAzureTableStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "tstNewAT"
+		}
+	}
+}
