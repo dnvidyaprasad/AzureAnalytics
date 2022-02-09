@@ -1,0 +1,16 @@
+{
+	"name": "AzureSql_Region",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDB_covid19",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Country"
+		}
+	}
+}
