@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Country_Metrics.Parquet",
+				"fileName": "Covid19_Metrics.Parquet",
 				"folderPath": "stagingarea/AzureMetrics",
 				"fileSystem": "workspace"
 			},
