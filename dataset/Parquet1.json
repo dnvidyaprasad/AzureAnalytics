@@ -16,6 +16,15 @@
 			},
 			"compressionCodec": "snappy"
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "CountryName",
+				"type": "UTF8"
+			},
+			{
+				"name": "CountryCode",
+				"type": "UTF8"
+			}
+		]
 	}
 }
