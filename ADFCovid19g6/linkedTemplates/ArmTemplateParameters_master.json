@@ -5,6 +5,15 @@
 		"factoryName": {
 			"value": "ADFCovid19g6"
 		},
+		"ADLS_covid19workspace_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDB_covid19_connectionString": {
+			"value": ""
+		},
+		"ADLS_covid19workspace_properties_typeProperties_url": {
+			"value": "https://covid192zdzq2edqrlv2.dfs.core.windows.net"
+		},
 		"containerUri": {
 			"value": ""
 		},
