@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "odscountry.Parquet",
+				"fileName": "Country.Parquet",
 				"folderPath": "stagingarea/AzureMetrics",
 				"fileSystem": "workspace"
 			},
