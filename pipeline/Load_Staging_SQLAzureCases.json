@@ -47,7 +47,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet_ASQLRegion",
+						"referenceName": "Parquet_staging_ASQLRegion",
 						"type": "DatasetReference"
 					}
 				]
