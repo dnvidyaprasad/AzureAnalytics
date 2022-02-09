@@ -95,7 +95,7 @@
 								},
 								"sink": {
 									"name": "C1_School closing",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -104,7 +104,7 @@
 								},
 								"sink": {
 									"name": "C1_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -113,7 +113,7 @@
 								},
 								"sink": {
 									"name": "C2_Workplace closing",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -122,7 +122,7 @@
 								},
 								"sink": {
 									"name": "C2_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -131,7 +131,7 @@
 								},
 								"sink": {
 									"name": "C3_Cancel public events",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -140,7 +140,7 @@
 								},
 								"sink": {
 									"name": "C3_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -149,7 +149,7 @@
 								},
 								"sink": {
 									"name": "C4_Restrictions on gatherings",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -158,7 +158,7 @@
 								},
 								"sink": {
 									"name": "C4_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -167,7 +167,7 @@
 								},
 								"sink": {
 									"name": "C5_Close public transport",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -176,7 +176,7 @@
 								},
 								"sink": {
 									"name": "C5_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -185,7 +185,7 @@
 								},
 								"sink": {
 									"name": "C6_Stay at home requirements",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -194,7 +194,7 @@
 								},
 								"sink": {
 									"name": "C6_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -203,7 +203,7 @@
 								},
 								"sink": {
 									"name": "C7_Restrictions on internal movement",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -212,7 +212,7 @@
 								},
 								"sink": {
 									"name": "C7_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -221,7 +221,7 @@
 								},
 								"sink": {
 									"name": "C8_International travel controls",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -230,7 +230,7 @@
 								},
 								"sink": {
 									"name": "E1_Income support",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -239,7 +239,7 @@
 								},
 								"sink": {
 									"name": "E1_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -248,7 +248,7 @@
 								},
 								"sink": {
 									"name": "E2_Debt contract relief",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -257,7 +257,7 @@
 								},
 								"sink": {
 									"name": "E3_Fiscal measures",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -266,7 +266,7 @@
 								},
 								"sink": {
 									"name": "E4_International support",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -275,7 +275,7 @@
 								},
 								"sink": {
 									"name": "H1_Public information campaigns",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -284,7 +284,7 @@
 								},
 								"sink": {
 									"name": "H1_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -293,7 +293,7 @@
 								},
 								"sink": {
 									"name": "H2_Testing policy",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -302,7 +302,7 @@
 								},
 								"sink": {
 									"name": "H3_Contact tracing",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -311,7 +311,7 @@
 								},
 								"sink": {
 									"name": "H4_Emergency investment in healthcare",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -320,7 +320,7 @@
 								},
 								"sink": {
 									"name": "H5_Investment in vaccines",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -329,7 +329,7 @@
 								},
 								"sink": {
 									"name": "H6_Facial Coverings",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -338,7 +338,7 @@
 								},
 								"sink": {
 									"name": "H6_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -347,7 +347,7 @@
 								},
 								"sink": {
 									"name": "H7_Vaccination policy",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -356,7 +356,7 @@
 								},
 								"sink": {
 									"name": "H7_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -365,7 +365,7 @@
 								},
 								"sink": {
 									"name": "H8_Protection of elderly people",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -374,7 +374,7 @@
 								},
 								"sink": {
 									"name": "H8_Flag",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -383,7 +383,7 @@
 								},
 								"sink": {
 									"name": "M1_Wildcard",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -392,7 +392,7 @@
 								},
 								"sink": {
 									"name": "StringencyIndex",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
@@ -401,7 +401,7 @@
 								},
 								"sink": {
 									"name": "StringencyIndexForDisplay",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -410,7 +410,7 @@
 								},
 								"sink": {
 									"name": "StringencyLegacyIndex",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -419,7 +419,7 @@
 								},
 								"sink": {
 									"name": "StringencyLegacyIndexForDisplay",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -428,7 +428,7 @@
 								},
 								"sink": {
 									"name": "GovernmentResponseIndex",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -437,7 +437,7 @@
 								},
 								"sink": {
 									"name": "GovernmentResponseIndexForDisplay",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -446,7 +446,7 @@
 								},
 								"sink": {
 									"name": "ContainmentHealthIndex",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -455,7 +455,7 @@
 								},
 								"sink": {
 									"name": "ContainmentHealthIndexForDisplay",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -464,7 +464,7 @@
 								},
 								"sink": {
 									"name": "EconomicSupportIndex",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -473,7 +473,7 @@
 								},
 								"sink": {
 									"name": "EconomicSupportIndexForDisplay",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
@@ -527,10 +527,11 @@
 								},
 								"sink": {
 									"name": "_ts",
-									"type": "String"
+									"type": "Int64"
 								}
 							}
 						],
+						"collectionReference": "",
 						"mapComplexValuesToString": true
 					}
 				},
