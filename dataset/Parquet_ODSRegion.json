@@ -1,5 +1,5 @@
 {
-	"name": "Parquet_staging_ASQLRegion",
+	"name": "Parquet_ODSRegion",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ADLS_covid19workspace",
@@ -11,12 +11,16 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "region.parquet",
-				"folderPath": "stagingarea/casesazuresql",
+				"folderPath": "ods",
 				"fileSystem": "workspace"
 			},
 			"compressionCodec": "snappy"
 		},
 		"schema": [
+			{
+				"name": "CountryKey",
+				"type": "INT32"
+			},
 			{
 				"name": "Country",
 				"type": "UTF8"
@@ -36,6 +40,14 @@
 				"type": "DECIMAL",
 				"precision": 10,
 				"scale": 5
+			},
+			{
+				"name": "InsertedDT",
+				"type": "INT96"
+			},
+			{
+				"name": "UpdateDT",
+				"type": "INT96"
 			}
 		]
 	}
