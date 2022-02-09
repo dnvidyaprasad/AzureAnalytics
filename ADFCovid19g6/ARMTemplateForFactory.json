@@ -177,7 +177,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "region.parquet",
+						"fileName": "region2.parquet",
 						"folderPath": "ods",
 						"fileSystem": "workspace"
 					},
