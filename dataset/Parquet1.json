@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Country.Parquet",
-				"folderPath": "stagingarea/AzureMetrics",
+				"fileName": "PolicyData.Parquet",
+				"folderPath": "stagingarea/policy",
 				"fileSystem": "workspace"
 			},
 			"compressionCodec": "snappy"
