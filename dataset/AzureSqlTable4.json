@@ -1,0 +1,54 @@
+{
+	"name": "AzureSqlTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CountryKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Country",
+				"type": "varchar"
+			},
+			{
+				"name": "CountryCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Latitude",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 5
+			},
+			{
+				"name": "Longitude",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 5
+			},
+			{
+				"name": "InsertedDT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "UpdateDT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "odscountry"
+		}
+	}
+}
