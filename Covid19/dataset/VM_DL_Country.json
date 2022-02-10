@@ -1,5 +1,5 @@
 {
-	"name": "VM_2_DL",
+	"name": "VM_DL_Country",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ADLS_covid19workspace",
