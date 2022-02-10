@@ -101,44 +101,6 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "load_ODS_Region",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "Create_workfile",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "load_ODS_Region",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"Region": {},
-									"workRegion": {},
-									"targetods": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
 						"name": "Create_workfile",
 						"type": "Copy",
 						"dependsOn": [],
@@ -192,6 +154,47 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "loadODSRegion",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Create_workfile",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "load_ODS_Region",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Region": {},
+									"workRegion": {},
+									"targetods": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "None",
+							"cacheSinks": {
+								"firstRowOnly": true
+							}
+						}
 					}
 				],
 				"policy": {
@@ -201,9 +204,9 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/load_ODS_Region')]",
 				"[concat(variables('factoryId'), '/datasets/Parquet_ODSRegion')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_workODSRegion')]"
+				"[concat(variables('factoryId'), '/datasets/ADLS_workODSRegion')]",
+				"[concat(variables('factoryId'), '/dataflows/load_ODS_Region')]"
 			]
 		},
 		{
