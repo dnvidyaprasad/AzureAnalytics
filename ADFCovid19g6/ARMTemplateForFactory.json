@@ -126,7 +126,7 @@
 								"parameters": {},
 								"datasetParameters": {
 									"Region": {},
-									"Target": {},
+									"workRegion": {},
 									"targetods": {}
 								}
 							},
@@ -187,7 +187,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ADLS_OdsRegionWork",
+								"referenceName": "ADLS_workODSRegion",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -203,11 +203,11 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/load_ODS_Region')]",
 				"[concat(variables('factoryId'), '/datasets/Parquet_ODSRegion')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_OdsRegionWork')]"
+				"[concat(variables('factoryId'), '/datasets/ADLS_workODSRegion')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_OdsRegionWork')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_workODSRegion')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -221,7 +221,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": "workregion.parquet",
-						"folderPath": "ods",
+						"folderPath": "tempworkarea",
 						"fileSystem": "workspace"
 					},
 					"compressionCodec": "snappy"
@@ -301,7 +301,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": "region.parquet",
-						"folderPath": "ods",
+						"folderPath": "tempworkarea",
 						"fileSystem": "workspace"
 					},
 					"compressionCodec": "snappy"
@@ -449,10 +449,10 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "ADLS_OdsRegionWork",
+								"referenceName": "ADLS_workODSRegion",
 								"type": "DatasetReference"
 							},
-							"name": "Target"
+							"name": "workRegion"
 						}
 					],
 					"sinks": [
@@ -466,7 +466,7 @@
 					],
 					"transformations": [
 						{
-							"name": "LookupTarget"
+							"name": "LookupworkRegion"
 						},
 						{
 							"name": "SurrogateKeycustomerkey"
@@ -478,12 +478,12 @@
 							"name": "Selectop"
 						}
 					],
-					"script": "source(output(\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5)\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> Region\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> Target\nRegion, Target lookup(Region@CountryCode == Target@CountryCode,\n\tmultiple: false,\n\tpickup: 'first',\n\tasc(CountryCode, true),\n\tbroadcast: 'auto')~> LookupTarget\nSelectop keyGenerate(output(CountryKey as long),\n\tstartAt: 1L) ~> SurrogateKeycustomerkey\nLookupTarget derive(output_CountryKey = CountryKey,\n\t\toutput_Country = iif(Region@Country== \"\",Target@Country,Region@Country),\n\t\toutput_countrycode = iif(Region@CountryCode==\"\",Target@CountryCode,Region@CountryCode),\n\t\toutput_Latitude = iif(Region@Latitude==0,Target@Latitude,Region@Latitude),\n\t\toutput_Longitude = iif(Region@Longitude==0,Target@Longitude,Region@Longitude),\n\t\toutput_InsertedDT = iif(isNull(Target@CountryCode),currentTimestamp(),InsertedDT),\n\t\toutput_UpdateDT = iif(Region@Country!=Target@Country || Region@Latitude != Target@Latitude || Region@Longitude !=Target@Longitude, currentTimestamp(),UpdateDT)) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tCountry = output_Country,\n\t\tCountryCode = output_countrycode,\n\t\tLatitude = output_Latitude,\n\t\tLongitude = output_Longitude,\n\t\tCountryKey,\n\t\tInsertedDT = output_InsertedDT,\n\t\tUpdateDT = output_UpdateDT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Selectop\nSurrogateKeycustomerkey sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tformat: 'parquet',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tCountryKey,\n\t\tCountry,\n\t\tCountryCode,\n\t\tLatitude,\n\t\tLongitude,\n\t\tInsertedDT,\n\t\tUpdateDT\n\t)) ~> targetods"
+					"script": "source(output(\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5)\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> Region\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> workRegion\nRegion, workRegion lookup(Region@CountryCode == workRegion@CountryCode,\n\tmultiple: false,\n\tpickup: 'first',\n\tasc(CountryCode, true),\n\tbroadcast: 'auto')~> LookupworkRegion\nSelectop keyGenerate(output(CountryKey as long),\n\tstartAt: 1L) ~> SurrogateKeycustomerkey\nLookupworkRegion derive(output_CountryKey = CountryKey,\n\t\toutput_Country = iif(Region@Country== \"\",workRegion@Country,Region@Country),\n\t\toutput_countrycode = iif(Region@CountryCode==\"\",workRegion@CountryCode,Region@CountryCode),\n\t\toutput_Latitude = iif(Region@Latitude==0,workRegion@Latitude,Region@Latitude),\n\t\toutput_Longitude = iif(Region@Longitude==0,workRegion@Longitude,Region@Longitude),\n\t\toutput_InsertedDT = iif(isNull(workRegion@CountryCode),currentTimestamp(),InsertedDT),\n\t\toutput_UpdateDT = iif(Region@Country!=workRegion@Country || Region@Latitude != workRegion@Latitude || Region@Longitude !=workRegion@Longitude, currentTimestamp(),UpdateDT)) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tCountry = output_Country,\n\t\tCountryCode = output_countrycode,\n\t\tLatitude = output_Latitude,\n\t\tLongitude = output_Longitude,\n\t\tCountryKey,\n\t\tInsertedDT = output_InsertedDT,\n\t\tUpdateDT = output_UpdateDT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Selectop\nSurrogateKeycustomerkey sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tformat: 'parquet',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tCountryKey,\n\t\tCountry,\n\t\tCountryCode,\n\t\tLatitude,\n\t\tLongitude,\n\t\tInsertedDT,\n\t\tUpdateDT\n\t)) ~> targetods"
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Parquet_staging_ASQLRegion')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_OdsRegionWork')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_workODSRegion')]",
 				"[concat(variables('factoryId'), '/datasets/Parquet_ODSRegion')]"
 			]
 		}
