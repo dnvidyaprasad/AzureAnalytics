@@ -1,5 +1,5 @@
 {
-	"name": "Parquet_ODSRegion",
+	"name": "ADLS_OdsRegionWork",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ADLS_covid19workspace",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "region.parquet",
+				"fileName": "workregion.parquet",
 				"folderPath": "ods",
 				"fileSystem": "workspace"
 			},
