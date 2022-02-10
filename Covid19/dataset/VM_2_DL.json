@@ -1,0 +1,21 @@
+{
+	"name": "VM_2_DL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_covid19workspace",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "country.parquet",
+				"folderPath": "stagingarea/casesonpremsql",
+				"fileSystem": "workspace"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
