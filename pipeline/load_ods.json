@@ -80,17 +80,16 @@
 						"type": "DataFlowReference"
 					},
 					"staging": {
-						"linkedService": {
-							"referenceName": "ADLS_covid19workspace",
-							"type": "LinkedServiceReference"
-						},
-						"folderPath": "workspace/tempworkarea/logging"
+						"folderPath": ""
 					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
 					},
-					"traceLevel": "Fine"
+					"traceLevel": "None",
+					"cacheSinks": {
+						"firstRowOnly": true
+					}
 				}
 			}
 		],
