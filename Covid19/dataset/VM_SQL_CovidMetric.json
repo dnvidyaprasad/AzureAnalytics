@@ -1,5 +1,5 @@
 {
-	"name": "VM_SQL_Tables",
+	"name": "VM_SQL_CovidMetric",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VM_SqlServer",
