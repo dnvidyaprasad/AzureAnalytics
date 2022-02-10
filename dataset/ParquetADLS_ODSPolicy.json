@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "policy.parquet",
-				"folderPath": "ods",
+				"folderPath": "ods/policy",
 				"fileSystem": "workspace"
 			},
 			"compressionCodec": "snappy"
