@@ -65,6 +65,65 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_OdsRegionWork')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_covid19workspace",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "workregion.parquet",
+						"folderPath": "ods",
+						"fileSystem": "workspace"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "CountryKey",
+						"type": "INT32"
+					},
+					{
+						"name": "Country",
+						"type": "UTF8"
+					},
+					{
+						"name": "CountryCode",
+						"type": "UTF8"
+					},
+					{
+						"name": "Latitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "Longitude",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "InsertedDT",
+						"type": "INT96"
+					},
+					{
+						"name": "UpdateDT",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_covid19workspace')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSql_Region')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -99,7 +158,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "region2.parquet",
+						"fileName": "region.parquet",
 						"folderPath": "ods",
 						"fileSystem": "workspace"
 					},
@@ -278,7 +337,7 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "Parquet_ODSRegion",
+								"referenceName": "ADLS_OdsRegionWork",
 								"type": "DatasetReference"
 							},
 							"name": "Target"
@@ -312,6 +371,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Parquet_staging_ASQLRegion')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_OdsRegionWork')]",
 				"[concat(variables('factoryId'), '/datasets/Parquet_ODSRegion')]"
 			]
 		},
@@ -324,7 +384,14 @@
 					{
 						"name": "load_ODS_Region",
 						"type": "ExecuteDataFlow",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Create_workfile",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "1.00:00:00",
 							"retry": 0,
@@ -351,6 +418,61 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "Create_workfile",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Parquet_ODSRegion",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ADLS_OdsRegionWork",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -360,7 +482,9 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/load_ODS_Region')]"
+				"[concat(variables('factoryId'), '/dataflows/load_ODS_Region')]",
+				"[concat(variables('factoryId'), '/datasets/Parquet_ODSRegion')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_OdsRegionWork')]"
 			]
 		}
 	]
