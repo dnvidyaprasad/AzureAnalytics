@@ -1,0 +1,34 @@
+{
+	"name": "load_ODS_Policy",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Parquet_staging_cosmosdb_Policy",
+						"type": "DatasetReference"
+					},
+					"name": "ADLSstagingPolicy"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet_ODSRegion",
+						"type": "DatasetReference"
+					},
+					"name": "ODSRegion"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "Lookup1"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "source(output(\n\t\tCountryName as string,\n\t\tCountryCode as string,\n\t\tRegionName as string,\n\t\tRegionCode as string,\n\t\tJurisdiction as string,\n\t\tDate as string,\n\t\tC1_Schoolclosing as integer,\n\t\tC1_Flag as integer,\n\t\tC2_Workplaceclosing as integer,\n\t\tC2_Flag as integer,\n\t\tC3_Cancelpublicevents as integer,\n\t\tC3_Flag as integer,\n\t\tC4_Restrictionsongatherings as integer,\n\t\tC4_Flag as integer,\n\t\tC5_Closepublictransport as integer,\n\t\tC5_Flag as integer,\n\t\tC6_Stayathomerequirements as integer,\n\t\tC6_Flag as integer,\n\t\tC7_Restrictionsoninternalmovement as integer,\n\t\tC7_Flag as integer,\n\t\tC8_Internationaltravelcontrols as integer,\n\t\tE1_Incomesupport as integer,\n\t\tE1_Flag as integer,\n\t\tE2_Debtcontractrelief as integer,\n\t\tE3_Fiscalmeasures as string,\n\t\tE4_Internationalsupport as string,\n\t\tH1_Publicinformationcampaigns as integer,\n\t\tH1_Flag as integer,\n\t\tH2_Testingpolicy as integer,\n\t\tH3_Contacttracing as string,\n\t\tH4_Emergencyinvestmentinhealthcare as string,\n\t\tH5_Investmentinvaccines as string,\n\t\tH6_FacialCoverings as integer,\n\t\tH6_Flag as integer,\n\t\tH7_Vaccinationpolicy as integer,\n\t\tH7_Flag as integer,\n\t\tH8_Protectionofelderlypeople as integer,\n\t\tH8_Flag as integer,\n\t\tM1_Wildcard as integer,\n\t\tStringencyIndexForDisplay as string,\n\t\tStringencyLegacyIndex as string,\n\t\tStringencyLegacyIndexForDisplay as string,\n\t\tGovernmentResponseIndex as string,\n\t\tGovernmentResponseIndexForDisplay as string,\n\t\tContainmentHealthIndex as string,\n\t\tContainmentHealthIndexForDisplay as string,\n\t\tEconomicSupportIndex as string,\n\t\tEconomicSupportIndexForDisplay as string,\n\t\tid as string,\n\t\t{_rid} as string,\n\t\t{_self} as string,\n\t\t{_etag} as string,\n\t\t{_attachments} as string,\n\t\t{_ts} as integer,\n\t\tStringencyIndex as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> ADLSstagingPolicy\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> ODSRegion\nADLSstagingPolicy, ODSRegion lookup(RegionCode == ODSRegion@CountryCode,\n\tmultiple: false,\n\tpickup: 'first',\n\tasc(ODSRegion@CountryCode, true),\n\tbroadcast: 'auto')~> Lookup1\nLookup1 select(mapColumn(\n\t\tCountryKey,\n\t\tCountryName,\n\t\tCountryCode = ADLSstagingPolicy@CountryCode,\n\t\tRegionName,\n\t\tRegionCode,\n\t\tJurisdiction,\n\t\tDate,\n\t\tC1_Schoolclosing,\n\t\tC1_Flag,\n\t\tC2_Workplaceclosing,\n\t\tC2_Flag,\n\t\tC3_Cancelpublicevents,\n\t\tC3_Flag,\n\t\tC4_Restrictionsongatherings,\n\t\tC4_Flag,\n\t\tC5_Closepublictransport,\n\t\tC5_Flag,\n\t\tC6_Stayathomerequirements,\n\t\tC6_Flag,\n\t\tC7_Restrictionsoninternalmovement,\n\t\tC7_Flag,\n\t\tC8_Internationaltravelcontrols,\n\t\tE1_Incomesupport,\n\t\tE1_Flag,\n\t\tE2_Debtcontractrelief,\n\t\tE3_Fiscalmeasures,\n\t\tE4_Internationalsupport,\n\t\tH1_Publicinformationcampaigns,\n\t\tH1_Flag,\n\t\tH2_Testingpolicy,\n\t\tH3_Contacttracing,\n\t\tH4_Emergencyinvestmentinhealthcare,\n\t\tH5_Investmentinvaccines,\n\t\tH6_FacialCoverings,\n\t\tH6_Flag,\n\t\tH7_Vaccinationpolicy,\n\t\tH7_Flag,\n\t\tH8_Protectionofelderlypeople,\n\t\tH8_Flag,\n\t\tM1_Wildcard,\n\t\tStringencyIndexForDisplay,\n\t\tStringencyLegacyIndex,\n\t\tStringencyLegacyIndexForDisplay,\n\t\tGovernmentResponseIndex,\n\t\tGovernmentResponseIndexForDisplay,\n\t\tContainmentHealthIndex,\n\t\tContainmentHealthIndexForDisplay,\n\t\tEconomicSupportIndex,\n\t\tEconomicSupportIndexForDisplay,\n\t\tStringencyIndex\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
+		}
+	}
+}
