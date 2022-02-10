@@ -28,6 +28,37 @@
 						"firstRowOnly": true
 					}
 				}
+			},
+			{
+				"name": "loadodspolicy",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "loadODSRegion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "load_ODS_Policy",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []
