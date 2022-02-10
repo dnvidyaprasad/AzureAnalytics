@@ -81,7 +81,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ADLS_OdsRegionWork",
+						"referenceName": "ADLS_workODSRegion",
 						"type": "DatasetReference"
 					}
 				]

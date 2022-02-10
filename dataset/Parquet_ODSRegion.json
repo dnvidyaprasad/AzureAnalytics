@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "region.parquet",
-				"folderPath": "ods",
+				"folderPath": "tempworkarea",
 				"fileSystem": "workspace"
 			},
 			"compressionCodec": "snappy"
