@@ -11,6 +11,9 @@
 		"AzureSqlDB_covid19_connectionString": {
 			"value": ""
 		},
+		"SQL_VM_connectionString": {
+			"value": ""
+		},
 		"ADLS_covid19workspace_properties_typeProperties_url": {
 			"value": "https://covid192zdzq2edqrlv2.dfs.core.windows.net"
 		},

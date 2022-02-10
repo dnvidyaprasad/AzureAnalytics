@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDB_covid19'"
 		},
+		"SQL_VM_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQL_VM'"
+		},
 		"ADLS_covid19workspace_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://covid192zdzq2edqrlv2.dfs.core.windows.net"
@@ -51,6 +55,9 @@
 					},
 					"AzureSqlDB_covid19_connectionString": {
 						"value": "[parameters('AzureSqlDB_covid19_connectionString')]"
+					},
+					"SQL_VM_connectionString": {
+						"value": "[parameters('SQL_VM_connectionString')]"
 					},
 					"ADLS_covid19workspace_properties_typeProperties_url": {
 						"value": "[parameters('ADLS_covid19workspace_properties_typeProperties_url')]"

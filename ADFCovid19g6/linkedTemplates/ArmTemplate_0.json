@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDB_covid19'"
 		},
+		"SQL_VM_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQL_VM'"
+		},
 		"ADLS_covid19workspace_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://covid192zdzq2edqrlv2.dfs.core.windows.net"
@@ -65,66 +69,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_workODSRegion')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLS_covid19workspace",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "workregion.parquet",
-						"folderPath": "tempworkarea",
-						"fileSystem": "workspace"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": [
-					{
-						"name": "CountryKey",
-						"type": "INT32"
-					},
-					{
-						"name": "Country",
-						"type": "UTF8"
-					},
-					{
-						"name": "CountryCode",
-						"type": "UTF8"
-					},
-					{
-						"name": "Latitude",
-						"type": "DECIMAL",
-						"precision": 10,
-						"scale": 5
-					},
-					{
-						"name": "Longitude",
-						"type": "DECIMAL",
-						"precision": 10,
-						"scale": 5
-					},
-					{
-						"name": "InsertedDT",
-						"type": "INT96"
-					},
-					{
-						"name": "UpdateDT",
-						"type": "INT96"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ADLS_covid19workspace')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSql_Region')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSql_Country')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -145,7 +90,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Parquet_ODSRegion')]",
+			"name": "[concat(parameters('factoryName'), '/ParquetADLS_ODSCountry')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -158,7 +103,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "region.parquet",
+						"fileName": "country.parquet",
 						"folderPath": "ods",
 						"fileSystem": "workspace"
 					},
@@ -204,7 +149,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Parquet_ODSRegion2')]",
+			"name": "[concat(parameters('factoryName'), '/ParquetADLS_ODSPolicy')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -217,20 +162,209 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "reg.parquet",
-						"folderPath": "tempworkarea",
+						"fileName": "policy.parquet",
+						"folderPath": "ods/policy",
 						"fileSystem": "workspace"
 					},
 					"compressionCodec": "snappy"
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "DateKey",
+						"type": "UTF8"
+					},
+					{
+						"name": "CountryKey",
+						"type": "INT32"
+					},
+					{
+						"name": "Jurisdiction",
+						"type": "UTF8"
+					},
+					{
+						"name": "C1_Schoolclosing",
+						"type": "INT32"
+					},
+					{
+						"name": "C1_Flag_Schoolclosing",
+						"type": "INT32"
+					},
+					{
+						"name": "C2_Workplaceclosing",
+						"type": "INT32"
+					},
+					{
+						"name": "C2_Flag_Workplaceclosing",
+						"type": "INT32"
+					},
+					{
+						"name": "C3_Cancelpublicevents",
+						"type": "INT32"
+					},
+					{
+						"name": "C3_Flag_Cancelpublicevents",
+						"type": "INT32"
+					},
+					{
+						"name": "C4_Restrictionsongatherings",
+						"type": "INT32"
+					},
+					{
+						"name": "C4_Flag_Restrictionsongatherings",
+						"type": "INT32"
+					},
+					{
+						"name": "C5_Closepublictransport",
+						"type": "INT32"
+					},
+					{
+						"name": "C5_Flag_Closepublictransport",
+						"type": "INT32"
+					},
+					{
+						"name": "C6_Stayathomerequirements",
+						"type": "INT32"
+					},
+					{
+						"name": "C6_Flag_Stayathomerequirements",
+						"type": "INT32"
+					},
+					{
+						"name": "C7_Restrictionsoninternalmovement",
+						"type": "INT32"
+					},
+					{
+						"name": "C7_Flag_Restrictionsoninternalmovement",
+						"type": "INT32"
+					},
+					{
+						"name": "C8_Internationaltravelcontrols",
+						"type": "INT32"
+					},
+					{
+						"name": "E1_Incomesupport",
+						"type": "INT32"
+					},
+					{
+						"name": "E1_Flag_Incomesupport",
+						"type": "INT32"
+					},
+					{
+						"name": "E2_Debtcontractrelief",
+						"type": "INT32"
+					},
+					{
+						"name": "E3_Fiscalmeasures",
+						"type": "UTF8"
+					},
+					{
+						"name": "E4_Internationalsupport",
+						"type": "UTF8"
+					},
+					{
+						"name": "H1_Publicinformationcampaigns",
+						"type": "INT32"
+					},
+					{
+						"name": "H1_Flag_Publicinformationcampaigns",
+						"type": "INT32"
+					},
+					{
+						"name": "H2_Testingpolicy",
+						"type": "INT32"
+					},
+					{
+						"name": "H3_Contacttracing",
+						"type": "UTF8"
+					},
+					{
+						"name": "H4_Emergencyinvestmentinhealthcare",
+						"type": "UTF8"
+					},
+					{
+						"name": "H5_Investmentinvaccines",
+						"type": "UTF8"
+					},
+					{
+						"name": "H6_FacialCoverings",
+						"type": "INT32"
+					},
+					{
+						"name": "H6_Flag_FacialCoverings",
+						"type": "INT32"
+					},
+					{
+						"name": "H7_Vaccinationpolicy",
+						"type": "INT32"
+					},
+					{
+						"name": "H7_Flag_Vaccinationpolicy",
+						"type": "INT32"
+					},
+					{
+						"name": "H8_Protectionofelderlypeople",
+						"type": "INT32"
+					},
+					{
+						"name": "H8_Flag_Protectionofelderlypeople",
+						"type": "INT32"
+					},
+					{
+						"name": "M1_Wildcard",
+						"type": "INT32"
+					},
+					{
+						"name": "StringencyIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "StringencyLegacyIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "StringencyLegacyIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "GovernmentResponseIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "GovernmentResponseIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "ContainmentHealthIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "ContainmentHealthIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "EconomicSupportIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "EconomicSupportIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "StringencyIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "InsertDT",
+						"type": "DATE"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ADLS_covid19workspace')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Parquet_staging_ASQLRegion')]",
+			"name": "[concat(parameters('factoryName'), '/Parquet_staging_ASQLCountry')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -243,7 +377,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "region.parquet",
+						"fileName": "country.parquet",
 						"folderPath": "stagingarea/casesazuresql",
 						"fileSystem": "workspace"
 					},
@@ -274,6 +408,272 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ADLS_covid19workspace')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet_staging_cosmosdb_Policy')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_covid19workspace",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "PolicyData.Parquet",
+						"folderPath": "stagingarea/policy",
+						"fileSystem": "workspace"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "CountryName",
+						"type": "UTF8"
+					},
+					{
+						"name": "CountryCode",
+						"type": "UTF8"
+					},
+					{
+						"name": "RegionName",
+						"type": "UTF8"
+					},
+					{
+						"name": "RegionCode",
+						"type": "UTF8"
+					},
+					{
+						"name": "Jurisdiction",
+						"type": "UTF8"
+					},
+					{
+						"name": "Date",
+						"type": "UTF8"
+					},
+					{
+						"name": "C1_Schoolclosing",
+						"type": "INT32"
+					},
+					{
+						"name": "C1_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "C2_Workplaceclosing",
+						"type": "INT32"
+					},
+					{
+						"name": "C2_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "C3_Cancelpublicevents",
+						"type": "INT32"
+					},
+					{
+						"name": "C3_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "C4_Restrictionsongatherings",
+						"type": "INT32"
+					},
+					{
+						"name": "C4_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "C5_Closepublictransport",
+						"type": "INT32"
+					},
+					{
+						"name": "C5_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "C6_Stayathomerequirements",
+						"type": "INT32"
+					},
+					{
+						"name": "C6_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "C7_Restrictionsoninternalmovement",
+						"type": "INT32"
+					},
+					{
+						"name": "C7_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "C8_Internationaltravelcontrols",
+						"type": "INT32"
+					},
+					{
+						"name": "E1_Incomesupport",
+						"type": "INT32"
+					},
+					{
+						"name": "E1_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "E2_Debtcontractrelief",
+						"type": "INT32"
+					},
+					{
+						"name": "E3_Fiscalmeasures",
+						"type": "UTF8"
+					},
+					{
+						"name": "E4_Internationalsupport",
+						"type": "UTF8"
+					},
+					{
+						"name": "H1_Publicinformationcampaigns",
+						"type": "INT32"
+					},
+					{
+						"name": "H1_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "H2_Testingpolicy",
+						"type": "INT32"
+					},
+					{
+						"name": "H3_Contacttracing",
+						"type": "UTF8"
+					},
+					{
+						"name": "H4_Emergencyinvestmentinhealthcare",
+						"type": "UTF8"
+					},
+					{
+						"name": "H5_Investmentinvaccines",
+						"type": "UTF8"
+					},
+					{
+						"name": "H6_FacialCoverings",
+						"type": "INT32"
+					},
+					{
+						"name": "H6_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "H7_Vaccinationpolicy",
+						"type": "INT32"
+					},
+					{
+						"name": "H7_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "H8_Protectionofelderlypeople",
+						"type": "INT32"
+					},
+					{
+						"name": "H8_Flag",
+						"type": "INT32"
+					},
+					{
+						"name": "M1_Wildcard",
+						"type": "INT32"
+					},
+					{
+						"name": "StringencyIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "StringencyLegacyIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "StringencyLegacyIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "GovernmentResponseIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "GovernmentResponseIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "ContainmentHealthIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "ContainmentHealthIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "EconomicSupportIndex",
+						"type": "UTF8"
+					},
+					{
+						"name": "EconomicSupportIndexForDisplay",
+						"type": "UTF8"
+					},
+					{
+						"name": "id",
+						"type": "UTF8"
+					},
+					{
+						"name": "_rid",
+						"type": "UTF8"
+					},
+					{
+						"name": "_self",
+						"type": "UTF8"
+					},
+					{
+						"name": "_etag",
+						"type": "UTF8"
+					},
+					{
+						"name": "_attachments",
+						"type": "UTF8"
+					},
+					{
+						"name": "_ts",
+						"type": "INT32"
+					},
+					{
+						"name": "StringencyIndex",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_covid19workspace')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQL_VM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SQL_VM_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "SelfhostedintegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/SelfhostedintegrationRuntime')]"
 			]
 		},
 		{
@@ -321,14 +721,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "AzureSql_Region",
+								"referenceName": "AzureSql_Country",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "Parquet_staging_ASQLRegion",
+								"referenceName": "Parquet_staging_ASQLCountry",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -342,12 +742,12 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureSql_Region')]",
-				"[concat(variables('factoryId'), '/datasets/Parquet_staging_ASQLRegion')]"
+				"[concat(variables('factoryId'), '/datasets/AzureSql_Country')]",
+				"[concat(variables('factoryId'), '/datasets/Parquet_staging_ASQLCountry')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/load_ODS_Region')]",
+			"name": "[concat(parameters('factoryName'), '/load_ODS_Country')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -356,31 +756,31 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "Parquet_staging_ASQLRegion",
+								"referenceName": "Parquet_staging_ASQLCountry",
 								"type": "DatasetReference"
 							},
-							"name": "Region"
+							"name": "Country"
 						},
 						{
 							"dataset": {
-								"referenceName": "ADLS_workODSRegion",
+								"referenceName": "ParquetADLS_ODSCountry",
 								"type": "DatasetReference"
 							},
-							"name": "workRegion"
+							"name": "Target"
 						}
 					],
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "Parquet_ODSRegion2",
+								"referenceName": "ParquetADLS_ODSCountry",
 								"type": "DatasetReference"
 							},
-							"name": "targetods"
+							"name": "ODSCountryTarget"
 						}
 					],
 					"transformations": [
 						{
-							"name": "LookupworkRegion"
+							"name": "LookupTarget"
 						},
 						{
 							"name": "SurrogateKeycustomerkey"
@@ -392,13 +792,67 @@
 							"name": "Selectop"
 						}
 					],
-					"script": "source(output(\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5)\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> Region\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> workRegion\nRegion, workRegion lookup(Region@CountryCode == workRegion@CountryCode,\n\tmultiple: false,\n\tpickup: 'first',\n\tasc(CountryCode, true),\n\tbroadcast: 'auto')~> LookupworkRegion\nSelectop keyGenerate(output(CountryKey as long),\n\tstartAt: 1L) ~> SurrogateKeycustomerkey\nLookupworkRegion derive(output_CountryKey = CountryKey,\n\t\toutput_Country = iif(Region@Country== \"\",workRegion@Country,Region@Country),\n\t\toutput_countrycode = iif(Region@CountryCode==\"\",workRegion@CountryCode,Region@CountryCode),\n\t\toutput_Latitude = iif(Region@Latitude==0,workRegion@Latitude,Region@Latitude),\n\t\toutput_Longitude = iif(Region@Longitude==0,workRegion@Longitude,Region@Longitude),\n\t\toutput_InsertedDT = iif(isNull(workRegion@CountryCode),currentTimestamp(),InsertedDT),\n\t\toutput_UpdateDT = iif(Region@Country!=workRegion@Country || Region@Latitude != workRegion@Latitude || Region@Longitude !=workRegion@Longitude, currentTimestamp(),UpdateDT)) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tCountry = output_Country,\n\t\tCountryCode = output_countrycode,\n\t\tLatitude = output_Latitude,\n\t\tLongitude = output_Longitude,\n\t\tCountryKey,\n\t\tInsertedDT = output_InsertedDT,\n\t\tUpdateDT = output_UpdateDT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Selectop\nSurrogateKeycustomerkey sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tCountryKey,\n\t\tCountry,\n\t\tCountryCode,\n\t\tLatitude,\n\t\tLongitude,\n\t\tInsertedDT,\n\t\tUpdateDT\n\t)) ~> targetods"
+					"script": "source(output(\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5)\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> Country\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> Target\nCountry, Target lookup(Country@CountryCode == Target@CountryCode,\n\tmultiple: false,\n\tpickup: 'first',\n\tasc(CountryCode, true),\n\tbroadcast: 'auto')~> LookupTarget\nSelectop keyGenerate(output(CountryKey as long),\n\tstartAt: 1L) ~> SurrogateKeycustomerkey\nLookupTarget derive(output_CountryKey = CountryKey,\n\t\toutput_Country = iif(Country@Country== \"\",Target@Country,Country@Country),\n\t\toutput_countrycode = iif(Country@CountryCode==\"\",Target@CountryCode,Country@CountryCode),\n\t\toutput_Latitude = iif(Country@Latitude==0,Target@Latitude,Country@Latitude),\n\t\toutput_Longitude = iif(Country@Longitude==0,Target@Longitude,Country@Longitude),\n\t\toutput_InsertedDT = iif(isNull(Target@CountryCode),currentTimestamp(),InsertedDT),\n\t\toutput_UpdateDT = iif(Country@Country!=Target@Country || Country@Latitude != Target@Latitude || Country@Longitude !=Target@Longitude, currentTimestamp(),UpdateDT)) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tCountry = output_Country,\n\t\tCountryCode = output_countrycode,\n\t\tLatitude = output_Latitude,\n\t\tLongitude = output_Longitude,\n\t\tCountryKey,\n\t\tInsertedDT = output_InsertedDT,\n\t\tUpdateDT = output_UpdateDT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Selectop\nSurrogateKeycustomerkey sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tformat: 'parquet',\n\tpartitionFileNames:['country.parquet'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tCountryKey,\n\t\tCountry,\n\t\tCountryCode,\n\t\tLatitude,\n\t\tLongitude,\n\t\tInsertedDT,\n\t\tUpdateDT\n\t),\n\tpartitionBy('hash', 1)) ~> ODSCountryTarget"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Parquet_staging_ASQLRegion')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_workODSRegion')]",
-				"[concat(variables('factoryId'), '/datasets/Parquet_ODSRegion2')]"
+				"[concat(variables('factoryId'), '/datasets/Parquet_staging_ASQLCountry')]",
+				"[concat(variables('factoryId'), '/datasets/ParquetADLS_ODSCountry')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/load_ODS_Policy')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Parquet_staging_cosmosdb_Policy",
+								"type": "DatasetReference"
+							},
+							"name": "ADLSstagingPolicy"
+						},
+						{
+							"dataset": {
+								"referenceName": "ParquetADLS_ODSCountry",
+								"type": "DatasetReference"
+							},
+							"name": "ODScountry"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ParquetADLS_ODSPolicy",
+								"type": "DatasetReference"
+							},
+							"name": "target"
+						}
+					],
+					"transformations": [
+						{
+							"name": "LookupCountry"
+						},
+						{
+							"name": "SelectCol"
+						},
+						{
+							"name": "FilterDateBased"
+						},
+						{
+							"name": "DerivedDatekeyAudit"
+						}
+					],
+					"script": "source(output(\n\t\tCountryName as string,\n\t\tCountryCode as string,\n\t\tRegionName as string,\n\t\tRegionCode as string,\n\t\tJurisdiction as string,\n\t\tDate as string,\n\t\tC1_Schoolclosing as integer,\n\t\tC1_Flag as integer,\n\t\tC2_Workplaceclosing as integer,\n\t\tC2_Flag as integer,\n\t\tC3_Cancelpublicevents as integer,\n\t\tC3_Flag as integer,\n\t\tC4_Restrictionsongatherings as integer,\n\t\tC4_Flag as integer,\n\t\tC5_Closepublictransport as integer,\n\t\tC5_Flag as integer,\n\t\tC6_Stayathomerequirements as integer,\n\t\tC6_Flag as integer,\n\t\tC7_Restrictionsoninternalmovement as integer,\n\t\tC7_Flag as integer,\n\t\tC8_Internationaltravelcontrols as integer,\n\t\tE1_Incomesupport as integer,\n\t\tE1_Flag as integer,\n\t\tE2_Debtcontractrelief as integer,\n\t\tE3_Fiscalmeasures as string,\n\t\tE4_Internationalsupport as string,\n\t\tH1_Publicinformationcampaigns as integer,\n\t\tH1_Flag as integer,\n\t\tH2_Testingpolicy as integer,\n\t\tH3_Contacttracing as string,\n\t\tH4_Emergencyinvestmentinhealthcare as string,\n\t\tH5_Investmentinvaccines as string,\n\t\tH6_FacialCoverings as integer,\n\t\tH6_Flag as integer,\n\t\tH7_Vaccinationpolicy as integer,\n\t\tH7_Flag as integer,\n\t\tH8_Protectionofelderlypeople as integer,\n\t\tH8_Flag as integer,\n\t\tM1_Wildcard as integer,\n\t\tStringencyIndexForDisplay as string,\n\t\tStringencyLegacyIndex as string,\n\t\tStringencyLegacyIndexForDisplay as string,\n\t\tGovernmentResponseIndex as string,\n\t\tGovernmentResponseIndexForDisplay as string,\n\t\tContainmentHealthIndex as string,\n\t\tContainmentHealthIndexForDisplay as string,\n\t\tEconomicSupportIndex as string,\n\t\tEconomicSupportIndexForDisplay as string,\n\t\tid as string,\n\t\t{_rid} as string,\n\t\t{_self} as string,\n\t\t{_etag} as string,\n\t\t{_attachments} as string,\n\t\t{_ts} as integer,\n\t\tStringencyIndex as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> ADLSstagingPolicy\nsource(output(\n\t\tCountryKey as integer,\n\t\tCountry as string,\n\t\tCountryCode as string,\n\t\tLatitude as decimal(10,5),\n\t\tLongitude as decimal(10,5),\n\t\tInsertedDT as timestamp,\n\t\tUpdateDT as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> ODScountry\nFilterDateBased, ODScountry lookup(ADLSstagingPolicy@CountryCode == ODScountry@CountryCode,\n\tmultiple: false,\n\tpickup: 'first',\n\tasc(ODScountry@CountryCode, true),\n\tbroadcast: 'auto')~> LookupCountry\nDerivedDatekeyAudit select(mapColumn(\n\t\tDateKey,\n\t\tCountryKey,\n\t\tJurisdiction,\n\t\tC1_Schoolclosing,\n\t\tC1_Flag_Schoolclosing = C1_Flag,\n\t\tC2_Workplaceclosing,\n\t\tC2_Flag_Workplaceclosing = C2_Flag,\n\t\tC3_Cancelpublicevents,\n\t\tC3_Flag_Cancelpublicevents = C3_Flag,\n\t\tC4_Restrictionsongatherings,\n\t\tC4_Flag_Restrictionsongatherings = C4_Flag,\n\t\tC5_Closepublictransport,\n\t\tC5_Flag_Closepublictransport = C5_Flag,\n\t\tC6_Stayathomerequirements,\n\t\tC6_Flag_Stayathomerequirements = C6_Flag,\n\t\tC7_Restrictionsoninternalmovement,\n\t\tC7_Flag_Restrictionsoninternalmovement = C7_Flag,\n\t\tC8_Internationaltravelcontrols,\n\t\tE1_Incomesupport,\n\t\tE1_Flag_Incomesupport = E1_Flag,\n\t\tE2_Debtcontractrelief,\n\t\tE3_Fiscalmeasures,\n\t\tE4_Internationalsupport,\n\t\tH1_Publicinformationcampaigns,\n\t\tH1_Flag_Publicinformationcampaigns = H1_Flag,\n\t\tH2_Testingpolicy,\n\t\tH3_Contacttracing,\n\t\tH4_Emergencyinvestmentinhealthcare,\n\t\tH5_Investmentinvaccines,\n\t\tH6_FacialCoverings,\n\t\tH6_Flag_FacialCoverings = H6_Flag,\n\t\tH7_Vaccinationpolicy,\n\t\tH7_Flag_Vaccinationpolicy = H7_Flag,\n\t\tH8_Protectionofelderlypeople,\n\t\tH8_Flag_Protectionofelderlypeople = H8_Flag,\n\t\tM1_Wildcard,\n\t\tStringencyIndexForDisplay,\n\t\tStringencyLegacyIndex,\n\t\tStringencyLegacyIndexForDisplay,\n\t\tGovernmentResponseIndex,\n\t\tGovernmentResponseIndexForDisplay,\n\t\tContainmentHealthIndex,\n\t\tContainmentHealthIndexForDisplay,\n\t\tEconomicSupportIndex,\n\t\tEconomicSupportIndexForDisplay,\n\t\tStringencyIndex,\n\t\tInsertDT\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectCol\nADLSstagingPolicy filter(toDate(Date,\"M/d/yyyy HH:mm:ss\") >= toDate(\"2020/01/01\",\"yyyy/MM/dd\")) ~> FilterDateBased\nLookupCountry derive(DateKey = concat(toString(year(toDate(Date, \"M/d/yyyy HH:mm:ss\"))) , lpad(toString(month(toDate(Date, \"M/d/yyyy HH:mm:ss\"))),2,\"0\"),  lpad(toString(dayOfMonth(toDate(Date, \"M/d/yyyy HH:mm:ss\"))),2,\"0\") ),\n\t\tInsertDT = currentDate()) ~> DerivedDatekeyAudit\nSelectCol sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tDateKey as string,\n\t\tCountryKey as integer,\n\t\tJurisdiction as string,\n\t\tC1_Schoolclosing as integer,\n\t\tC1_Flag_Schoolclosing as integer,\n\t\tC2_Workplaceclosing as integer,\n\t\tC2_Flag_Workplaceclosing as integer,\n\t\tC3_Cancelpublicevents as integer,\n\t\tC3_Flag_Cancelpublicevents as integer,\n\t\tC4_Restrictionsongatherings as integer,\n\t\tC4_Flag_Restrictionsongatherings as integer,\n\t\tC5_Closepublictransport as integer,\n\t\tC5_Flag_Closepublictransport as integer,\n\t\tC6_Stayathomerequirements as integer,\n\t\tC6_Flag_Stayathomerequirements as integer,\n\t\tC7_Restrictionsoninternalmovement as integer,\n\t\tC7_Flag_Restrictionsoninternalmovement as integer,\n\t\tC8_Internationaltravelcontrols as integer,\n\t\tE1_Incomesupport as integer,\n\t\tE1_Flag_Incomesupport as integer,\n\t\tE2_Debtcontractrelief as integer,\n\t\tE3_Fiscalmeasures as string,\n\t\tE4_Internationalsupport as string,\n\t\tH1_Publicinformationcampaigns as integer,\n\t\tH1_Flag_Publicinformationcampaigns as integer,\n\t\tH2_Testingpolicy as integer,\n\t\tH3_Contacttracing as string,\n\t\tH4_Emergencyinvestmentinhealthcare as string,\n\t\tH5_Investmentinvaccines as string,\n\t\tH6_FacialCoverings as integer,\n\t\tH6_Flag_FacialCoverings as integer,\n\t\tH7_Vaccinationpolicy as integer,\n\t\tH7_Flag_Vaccinationpolicy as integer,\n\t\tH8_Protectionofelderlypeople as integer,\n\t\tH8_Flag_Protectionofelderlypeople as integer,\n\t\tM1_Wildcard as integer,\n\t\tStringencyIndexForDisplay as string,\n\t\tStringencyLegacyIndex as string,\n\t\tStringencyLegacyIndexForDisplay as string,\n\t\tGovernmentResponseIndex as string,\n\t\tGovernmentResponseIndexForDisplay as string,\n\t\tContainmentHealthIndex as string,\n\t\tContainmentHealthIndexForDisplay as string,\n\t\tEconomicSupportIndex as string,\n\t\tEconomicSupportIndexForDisplay as string,\n\t\tStringencyIndex as string,\n\t\tInsertDT as date\n\t),\n\tformat: 'parquet',\n\tpartitionFileNames:['policy20211231.parquet'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> target"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Parquet_staging_cosmosdb_Policy')]",
+				"[concat(variables('factoryId'), '/datasets/ParquetADLS_ODSCountry')]",
+				"[concat(variables('factoryId'), '/datasets/ParquetADLS_ODSPolicy')]"
 			]
 		},
 		{
@@ -408,11 +862,11 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Create_workfile",
-						"type": "Copy",
+						"name": "loadODSCountry",
+						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
-							"timeout": "7.00:00:00",
+							"timeout": "1.00:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -420,54 +874,33 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"source": {
-								"type": "ParquetSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": false,
-									"enablePartitionDiscovery": false
+							"dataflow": {
+								"referenceName": "load_ODS_Country",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Country": {},
+									"Target": {},
+									"ODSCountryTarget": {}
 								}
 							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "ParquetWriteSettings"
-								}
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
+							"traceLevel": "None",
+							"cacheSinks": {
+								"firstRowOnly": true
 							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Parquet_ODSRegion",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ADLS_workODSRegion",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
+						}
 					},
 					{
-						"name": "loadODSRegion",
+						"name": "loadodspolicy",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
-								"activity": "Create_workfile",
+								"activity": "loadODSCountry",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -483,13 +916,13 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "load_ODS_Region",
+								"referenceName": "load_ODS_Policy",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"Region": {},
-									"workRegion": {},
-									"targetods": {}
+									"ADLSstagingPolicy": {},
+									"ODScountry": {},
+									"target": {}
 								}
 							},
 							"staging": {},
@@ -497,10 +930,7 @@
 								"coreCount": 8,
 								"computeType": "General"
 							},
-							"traceLevel": "None",
-							"cacheSinks": {
-								"firstRowOnly": true
-							}
+							"traceLevel": "Fine"
 						}
 					}
 				],
@@ -511,9 +941,56 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Parquet_ODSRegion')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_workODSRegion')]",
-				"[concat(variables('factoryId'), '/dataflows/load_ODS_Region')]"
+				"[concat(variables('factoryId'), '/dataflows/load_ODS_Country')]",
+				"[concat(variables('factoryId'), '/dataflows/load_ODS_Policy')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tmp_ods')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "loadodspolicy",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "load_ODS_Policy",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ADLSstagingPolicy": {},
+									"ODScountry": {},
+									"target": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/load_ODS_Policy')]"
 			]
 		}
 	]
