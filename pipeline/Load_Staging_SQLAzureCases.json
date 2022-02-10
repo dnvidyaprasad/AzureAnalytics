@@ -41,13 +41,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AzureSql_Region",
+						"referenceName": "AzureSql_Country",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquet_staging_ASQLRegion",
+						"referenceName": "Parquet_staging_ASQLCountry",
 						"type": "DatasetReference"
 					}
 				]
