@@ -13,7 +13,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "ParquetADLS_ODSRegion",
+						"referenceName": "ParquetADLS_ODSCountry",
 						"type": "DatasetReference"
 					},
 					"name": "ODSRegion"

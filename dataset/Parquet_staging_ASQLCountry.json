@@ -1,5 +1,5 @@
 {
-	"name": "Parquet_staging_ASQLRegion",
+	"name": "Parquet_staging_ASQLCountry",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ADLS_covid19workspace",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "region.parquet",
+				"fileName": "country.parquet",
 				"folderPath": "stagingarea/casesazuresql",
 				"fileSystem": "workspace"
 			},

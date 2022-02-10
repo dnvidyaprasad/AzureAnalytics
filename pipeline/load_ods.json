@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "loadODSRegion",
+				"name": "loadODSCountry",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "load_ODS_Region",
+						"referenceName": "load_ODS_Country",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -34,7 +34,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "loadODSRegion",
+						"activity": "loadODSCountry",
 						"dependencyConditions": [
 							"Succeeded"
 						]
