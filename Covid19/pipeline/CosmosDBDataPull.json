@@ -254,7 +254,7 @@
 								},
 								"sink": {
 									"name": "E3_Fiscal_measures",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -308,7 +308,7 @@
 								},
 								"sink": {
 									"name": "H4_Emergency_investment_in_healthcare",
-									"type": "Int32"
+									"type": "Double"
 								}
 							},
 							{
@@ -389,7 +389,7 @@
 								},
 								"sink": {
 									"name": "StringencyIndex",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -398,7 +398,7 @@
 								},
 								"sink": {
 									"name": "StringencyIndexForDisplay",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -407,7 +407,7 @@
 								},
 								"sink": {
 									"name": "StringencyLegacyIndex",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -416,7 +416,7 @@
 								},
 								"sink": {
 									"name": "StringencyLegacyIndexForDisplay",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -425,7 +425,7 @@
 								},
 								"sink": {
 									"name": "GovernmentResponseIndex",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -434,7 +434,7 @@
 								},
 								"sink": {
 									"name": "GovernmentResponseIndexForDisplay",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -443,7 +443,7 @@
 								},
 								"sink": {
 									"name": "ContainmentHealthIndex",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -452,7 +452,7 @@
 								},
 								"sink": {
 									"name": "ContainmentHealthIndexForDisplay",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -461,7 +461,7 @@
 								},
 								"sink": {
 									"name": "EconomicSupportIndex",
-									"type": "Int32"
+									"type": "Double"
 								}
 							},
 							{
@@ -470,7 +470,7 @@
 								},
 								"sink": {
 									"name": "EconomicSupportIndexForDisplay",
-									"type": "Int32"
+									"type": "Double"
 								}
 							},
 							{
