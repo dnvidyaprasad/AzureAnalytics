@@ -3,11 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "loadODSCountry",
-				"type": "ExecuteDataFlow",
+				"name": "Create_workfile",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "1.00:00:00",
+					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -15,26 +15,52 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "load_ODS_Country",
-						"type": "DataFlowReference"
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						}
 					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
 					},
-					"traceLevel": "None",
-					"cacheSinks": {
-						"firstRowOnly": true
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "Parquet_ODSRegion",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ADLS_workODSRegion",
+						"type": "DatasetReference"
+					}
+				]
 			},
 			{
-				"name": "loadodspolicy",
+				"name": "loadODSRegion",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "loadODSCountry",
+						"activity": "Create_workfile",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -50,14 +76,20 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "load_ODS_Policy",
+						"referenceName": "load_ODS_Region",
 						"type": "DataFlowReference"
+					},
+					"staging": {
+						"folderPath": ""
 					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
 					},
-					"traceLevel": "Fine"
+					"traceLevel": "None",
+					"cacheSinks": {
+						"firstRowOnly": true
+					}
 				}
 			}
 		],
