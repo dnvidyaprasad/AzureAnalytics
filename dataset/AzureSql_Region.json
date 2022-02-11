@@ -1,5 +1,5 @@
 {
-	"name": "AzureSql_Country",
+	"name": "AzureSql_Region",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDB_covid19",
