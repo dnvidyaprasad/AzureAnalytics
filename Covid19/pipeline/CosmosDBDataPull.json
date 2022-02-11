@@ -317,7 +317,7 @@
 								},
 								"sink": {
 									"name": "H5_Investment_in_vaccines",
-									"type": "Int32"
+									"type": "Double"
 								}
 							},
 							{
