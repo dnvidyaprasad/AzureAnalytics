@@ -254,7 +254,7 @@
 								},
 								"sink": {
 									"name": "E3_Fiscal_measures",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
