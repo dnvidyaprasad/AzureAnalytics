@@ -263,7 +263,7 @@
 								},
 								"sink": {
 									"name": "E4_International_support",
-									"type": "Int32"
+									"type": "Double"
 								}
 							},
 							{
