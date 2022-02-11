@@ -55,7 +55,8 @@
 									"path": "$['RegionName']"
 								},
 								"sink": {
-									"name": "RegionName"
+									"name": "RegionName",
+									"type": "String"
 								}
 							},
 							{
@@ -63,7 +64,8 @@
 									"path": "$['RegionCode']"
 								},
 								"sink": {
-									"name": "RegionCode"
+									"name": "RegionCode",
+									"type": "String"
 								}
 							},
 							{
@@ -71,7 +73,8 @@
 									"path": "$['Jurisdiction']"
 								},
 								"sink": {
-									"name": "Jurisdiction"
+									"name": "Jurisdiction",
+									"type": "String"
 								}
 							},
 							{
@@ -79,7 +82,8 @@
 									"path": "$['Date']"
 								},
 								"sink": {
-									"name": "Date"
+									"name": "Date",
+									"type": "String"
 								}
 							},
 							{
@@ -87,7 +91,8 @@
 									"path": "$['C1_School closing']"
 								},
 								"sink": {
-									"name": "C1_School_closing"
+									"name": "C1_School_closing",
+									"type": "Int32"
 								}
 							},
 							{
@@ -95,7 +100,8 @@
 									"path": "$['C1_Flag']"
 								},
 								"sink": {
-									"name": "C1_Flag"
+									"name": "C1_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -103,7 +109,8 @@
 									"path": "$['C2_Workplace closing']"
 								},
 								"sink": {
-									"name": "C2_Workplace_closing"
+									"name": "C2_Workplace_closing",
+									"type": "Int32"
 								}
 							},
 							{
@@ -111,7 +118,8 @@
 									"path": "$['C2_Flag']"
 								},
 								"sink": {
-									"name": "C2_Flag"
+									"name": "C2_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -119,7 +127,8 @@
 									"path": "$['C3_Cancel public events']"
 								},
 								"sink": {
-									"name": "C3_Cancel_public_events"
+									"name": "C3_Cancel_public_events",
+									"type": "Int32"
 								}
 							},
 							{
@@ -127,7 +136,8 @@
 									"path": "$['C3_Flag']"
 								},
 								"sink": {
-									"name": "C3_Flag"
+									"name": "C3_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -135,7 +145,8 @@
 									"path": "$['C4_Restrictions on gatherings']"
 								},
 								"sink": {
-									"name": "C4_Restrictions_on_gatherings"
+									"name": "C4_Restrictions_on_gatherings",
+									"type": "Int32"
 								}
 							},
 							{
@@ -143,7 +154,8 @@
 									"path": "$['C4_Flag']"
 								},
 								"sink": {
-									"name": "C4_Flag"
+									"name": "C4_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -151,7 +163,8 @@
 									"path": "$['C5_Close public transport']"
 								},
 								"sink": {
-									"name": "C5_Close_public_transport"
+									"name": "C5_Close_public_transport",
+									"type": "Int32"
 								}
 							},
 							{
@@ -159,7 +172,8 @@
 									"path": "$['C5_Flag']"
 								},
 								"sink": {
-									"name": "C5_Flag"
+									"name": "C5_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -167,7 +181,8 @@
 									"path": "$['C6_Stay at home requirements']"
 								},
 								"sink": {
-									"name": "C6_Stay_at_home_requirements"
+									"name": "C6_Stay_at_home_requirements",
+									"type": "Int32"
 								}
 							},
 							{
@@ -175,7 +190,8 @@
 									"path": "$['C6_Flag']"
 								},
 								"sink": {
-									"name": "C6_Flag"
+									"name": "C6_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -183,7 +199,8 @@
 									"path": "$['C7_Restrictions on internal movement']"
 								},
 								"sink": {
-									"name": "C7_Restrictions_on_internal_movement"
+									"name": "C7_Restrictions_on_internal_movement",
+									"type": "Int32"
 								}
 							},
 							{
@@ -191,7 +208,8 @@
 									"path": "$['C7_Flag']"
 								},
 								"sink": {
-									"name": "C7_Flag"
+									"name": "C7_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -199,7 +217,8 @@
 									"path": "$['C8_International travel controls']"
 								},
 								"sink": {
-									"name": "C8_International_travel_controls"
+									"name": "C8_International_travel_controls",
+									"type": "Int32"
 								}
 							},
 							{
@@ -207,7 +226,8 @@
 									"path": "$['E1_Income support']"
 								},
 								"sink": {
-									"name": "E1_Income_support"
+									"name": "E1_Income_support",
+									"type": "Int32"
 								}
 							},
 							{
@@ -215,7 +235,8 @@
 									"path": "$['E1_Flag']"
 								},
 								"sink": {
-									"name": "E1_Flag"
+									"name": "E1_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -223,7 +244,8 @@
 									"path": "$['E2_Debt contract relief']"
 								},
 								"sink": {
-									"name": "E2_Debt_contract_relief"
+									"name": "E2_Debt_contract_relief",
+									"type": "Int32"
 								}
 							},
 							{
@@ -231,7 +253,8 @@
 									"path": "$['E3_Fiscal measures']"
 								},
 								"sink": {
-									"name": "E3_Fiscal_measures"
+									"name": "E3_Fiscal_measures",
+									"type": "Int32"
 								}
 							},
 							{
@@ -239,7 +262,8 @@
 									"path": "$['E4_International support']"
 								},
 								"sink": {
-									"name": "E4_International_support"
+									"name": "E4_International_support",
+									"type": "Int32"
 								}
 							},
 							{
@@ -247,7 +271,8 @@
 									"path": "$['H1_Public information campaigns']"
 								},
 								"sink": {
-									"name": "H1_Public_information_campaigns"
+									"name": "H1_Public_information_campaigns",
+									"type": "Int32"
 								}
 							},
 							{
@@ -255,7 +280,8 @@
 									"path": "$['H1_Flag']"
 								},
 								"sink": {
-									"name": "H1_Flag"
+									"name": "H1_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -263,7 +289,8 @@
 									"path": "$['H2_Testing policy']"
 								},
 								"sink": {
-									"name": "H2_Testing_policy"
+									"name": "H2_Testing_policy",
+									"type": "Int32"
 								}
 							},
 							{
@@ -271,7 +298,8 @@
 									"path": "$['H3_Contact tracing']"
 								},
 								"sink": {
-									"name": "H3_Contact_tracing"
+									"name": "H3_Contact_tracing",
+									"type": "Int32"
 								}
 							},
 							{
@@ -279,7 +307,8 @@
 									"path": "$['H4_Emergency investment in healthcare']"
 								},
 								"sink": {
-									"name": "H4_Emergency_investment_in_healthcare"
+									"name": "H4_Emergency_investment_in_healthcare",
+									"type": "Int32"
 								}
 							},
 							{
@@ -287,7 +316,8 @@
 									"path": "$['H5_Investment in vaccines']"
 								},
 								"sink": {
-									"name": "H5_Investment_in_vaccines"
+									"name": "H5_Investment_in_vaccines",
+									"type": "Int32"
 								}
 							},
 							{
@@ -295,7 +325,8 @@
 									"path": "$['H6_Facial Coverings']"
 								},
 								"sink": {
-									"name": "H6_Facial_Coverings"
+									"name": "H6_Facial_Coverings",
+									"type": "Int32"
 								}
 							},
 							{
@@ -303,7 +334,8 @@
 									"path": "$['H6_Flag']"
 								},
 								"sink": {
-									"name": "H6_Flag"
+									"name": "H6_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -311,7 +343,8 @@
 									"path": "$['H7_Vaccination policy']"
 								},
 								"sink": {
-									"name": "H7_Vaccination_policy"
+									"name": "H7_Vaccination_policy",
+									"type": "Int32"
 								}
 							},
 							{
@@ -319,7 +352,8 @@
 									"path": "$['H7_Flag']"
 								},
 								"sink": {
-									"name": "H7_Flag"
+									"name": "H7_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -327,7 +361,8 @@
 									"path": "$['H8_Protection of elderly people']"
 								},
 								"sink": {
-									"name": "H8_Protection_of_elderly_people"
+									"name": "H8_Protection_of_elderly_people",
+									"type": "Int32"
 								}
 							},
 							{
@@ -335,7 +370,8 @@
 									"path": "$['H8_Flag']"
 								},
 								"sink": {
-									"name": "H8_Flag"
+									"name": "H8_Flag",
+									"type": "Int32"
 								}
 							},
 							{
@@ -343,7 +379,8 @@
 									"path": "$['M1_Wildcard']"
 								},
 								"sink": {
-									"name": "M1_Wildcard"
+									"name": "M1_Wildcard",
+									"type": "Int32"
 								}
 							},
 							{
@@ -351,7 +388,8 @@
 									"path": "$['StringencyIndex']"
 								},
 								"sink": {
-									"name": "StringencyIndex"
+									"name": "StringencyIndex",
+									"type": "String"
 								}
 							},
 							{
@@ -359,7 +397,8 @@
 									"path": "$['StringencyIndexForDisplay']"
 								},
 								"sink": {
-									"name": "StringencyIndexForDisplay"
+									"name": "StringencyIndexForDisplay",
+									"type": "Int32"
 								}
 							},
 							{
@@ -367,7 +406,8 @@
 									"path": "$['StringencyLegacyIndex']"
 								},
 								"sink": {
-									"name": "StringencyLegacyIndex"
+									"name": "StringencyLegacyIndex",
+									"type": "Int32"
 								}
 							},
 							{
@@ -375,7 +415,8 @@
 									"path": "$['StringencyLegacyIndexForDisplay']"
 								},
 								"sink": {
-									"name": "StringencyLegacyIndexForDisplay"
+									"name": "StringencyLegacyIndexForDisplay",
+									"type": "Int32"
 								}
 							},
 							{
@@ -383,7 +424,8 @@
 									"path": "$['GovernmentResponseIndex']"
 								},
 								"sink": {
-									"name": "GovernmentResponseIndex"
+									"name": "GovernmentResponseIndex",
+									"type": "Int32"
 								}
 							},
 							{
@@ -391,7 +433,8 @@
 									"path": "$['GovernmentResponseIndexForDisplay']"
 								},
 								"sink": {
-									"name": "GovernmentResponseIndexForDisplay"
+									"name": "GovernmentResponseIndexForDisplay",
+									"type": "Int32"
 								}
 							},
 							{
@@ -399,7 +442,8 @@
 									"path": "$['ContainmentHealthIndex']"
 								},
 								"sink": {
-									"name": "ContainmentHealthIndex"
+									"name": "ContainmentHealthIndex",
+									"type": "Int32"
 								}
 							},
 							{
@@ -407,7 +451,8 @@
 									"path": "$['ContainmentHealthIndexForDisplay']"
 								},
 								"sink": {
-									"name": "ContainmentHealthIndexForDisplay"
+									"name": "ContainmentHealthIndexForDisplay",
+									"type": "Int32"
 								}
 							},
 							{
@@ -415,7 +460,8 @@
 									"path": "$['EconomicSupportIndex']"
 								},
 								"sink": {
-									"name": "EconomicSupportIndex"
+									"name": "EconomicSupportIndex",
+									"type": "Int32"
 								}
 							},
 							{
@@ -423,7 +469,8 @@
 									"path": "$['EconomicSupportIndexForDisplay']"
 								},
 								"sink": {
-									"name": "EconomicSupportIndexForDisplay"
+									"name": "EconomicSupportIndexForDisplay",
+									"type": "Int32"
 								}
 							},
 							{
@@ -431,7 +478,8 @@
 									"path": "$['id']"
 								},
 								"sink": {
-									"name": "id"
+									"name": "id",
+									"type": "String"
 								}
 							},
 							{
@@ -439,7 +487,8 @@
 									"path": "$['_rid']"
 								},
 								"sink": {
-									"name": "_rid"
+									"name": "_rid",
+									"type": "String"
 								}
 							},
 							{
@@ -447,7 +496,8 @@
 									"path": "$['_self']"
 								},
 								"sink": {
-									"name": "_self"
+									"name": "_self",
+									"type": "String"
 								}
 							},
 							{
@@ -455,7 +505,8 @@
 									"path": "$['_etag']"
 								},
 								"sink": {
-									"name": "_etag"
+									"name": "_etag",
+									"type": "String"
 								}
 							},
 							{
@@ -463,7 +514,8 @@
 									"path": "$['_attachments']"
 								},
 								"sink": {
-									"name": "_attachments"
+									"name": "_attachments",
+									"type": "String"
 								}
 							},
 							{
@@ -471,7 +523,8 @@
 									"path": "$['_ts']"
 								},
 								"sink": {
-									"name": "_ts"
+									"name": "_ts",
+									"type": "String"
 								}
 							}
 						]
