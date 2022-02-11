@@ -1,5 +1,5 @@
 {
-	"name": "CosmosDBDataPull",
+	"name": "CosmosDB_DataPull",
 	"properties": {
 		"activities": [
 			{
