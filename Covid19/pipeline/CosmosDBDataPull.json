@@ -398,7 +398,7 @@
 								},
 								"sink": {
 									"name": "StringencyIndexForDisplay",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -407,7 +407,7 @@
 								},
 								"sink": {
 									"name": "StringencyLegacyIndex",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -416,7 +416,7 @@
 								},
 								"sink": {
 									"name": "StringencyLegacyIndexForDisplay",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -425,7 +425,7 @@
 								},
 								"sink": {
 									"name": "GovernmentResponseIndex",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -434,7 +434,7 @@
 								},
 								"sink": {
 									"name": "GovernmentResponseIndexForDisplay",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -443,7 +443,7 @@
 								},
 								"sink": {
 									"name": "ContainmentHealthIndex",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -452,7 +452,7 @@
 								},
 								"sink": {
 									"name": "ContainmentHealthIndexForDisplay",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
