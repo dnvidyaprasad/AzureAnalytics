@@ -2,7 +2,7 @@
 	"name": "Run query",
 	"properties": {
 		"content": {
-			"query": "\nSELECT * from odsCountry\nSELECT count(distinct CountryKey) from odsPolicy\n\n\nSELECT * from odsPolicy\nwhere c1_schoolclosing=1\n\nSELECT datekey, count(*)\n from odsPolicy\n group by datekey\n order by 1",
+			"query": "\nSELECT * from odsCountry\nSELECT count(distinct CountryKey) from odsPolicy\n\nSELECT count(*) from odsPolicy\nSELECT count(*) from odsPolicy2\n\nSELECT * from odsPolicy\nwhere c1_schoolclosing=1\n\nSELECT datekey, count(*)\n from odsPolicy\n group by datekey\n order by 1",
 			"metadata": {
 				"language": "sql"
 			},

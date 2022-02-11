@@ -1,0 +1,17 @@
+{
+	"name": "views",
+	"properties": {
+		"content": {
+			"query": "drop view vwCountry\nCREATE VIEW vwCountry\nAS SELECT *, RANK() OVER (order by CountryCode) odr\nFROM odsCountry\nwhere Latitude is not NULL\n\nSelect * from dbo.vwCountry",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "COVID19G6",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
